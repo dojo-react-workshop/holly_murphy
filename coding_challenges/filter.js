@@ -5,11 +5,10 @@ Array.prototype.filter = function (cb) {
             newArr.push (val);
         }
         
-    }, this);        
+    });        
 
     return newArr
 }
-
 
 const a=[1,2,3,4,5,10,22,23]
 

@@ -1,4 +1,5 @@
 Array.prototype.map = function(cb){
+	//this can access the array that was calling this function
 	var newArr=[]
 
 	this.forEach(function(val, ind, arr){
