@@ -25,10 +25,10 @@ function caller(param){
 
 function myDoubleConsoleLog(param_1, param_2){
 	if(typeof param_1 === "function"){
-		console.log(param_1())
+		param_1()
 	}
 	if(typeof param_2 === "function"){
-		console.log(param_2())
+		param_2()
 	}
 }
 
