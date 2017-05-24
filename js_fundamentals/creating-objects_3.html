@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<script type="text/javascript">
+		
+    function VehicleConstructor(name, numWheels, numPass, speed=0){
+       // this={};
+
+        this.name=name;
+        this.speed=speed;
+
+       // return this
+       //using new keyword also creates a prototype object, link it, and throw it in the chain
+    }
+
+    VehicleConstructor.prototype.accelerate = function(velChg = 1){
+        this.speed+=velChg;
+        return this.speed;
+    }
+
+    const v1 = new VehicleConstructor('bus',0);
+
+	</script>
+</head>
+<body>
+
+</body>
+</html>
