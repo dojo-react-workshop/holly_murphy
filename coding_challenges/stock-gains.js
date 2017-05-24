@@ -13,9 +13,9 @@ const applePricesYesterday = [10,7,5,8,11,9] //we will have an array of prices
 //return best profit could have made from one purchase and one sale
 //for this one, buy low at 5 and sell high at 11
 
-function getMaxProfit(applePricesYesterday, ind){
+function getMaxProfit(applePricesYesterday, ind=0){
 	if (ind+1 >= applePricesYesterday.length){
-		return;
+		return //throw new Error('Must provide more than 1 price')
 	}
 
 	let maxDiff = applePricesYesterday[ind+1] - applePricesYesterday[ind];
