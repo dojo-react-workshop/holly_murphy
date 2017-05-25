@@ -7,7 +7,10 @@
   <title>NameList</title>
   <!--<link rel="stylesheet" src='./survey.css'>
     <script src="./survey.js"></script>-->
-<link rel="stylesheet" type="text/css" href="templates/main.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="templates/main.js"></script>
+    <link rel="stylesheet" type="text/css" href="templates/main.css">
+
 </head>
 
 <body>
@@ -20,11 +23,11 @@
             
             </form>
         </div>
-        <div id='name_list'>
-            <% for(var x=0; x<name.length; x++){ %>
-            <p><%= name[x] %></p>
-            <% } %>
-        </div>
+         <div id="names_list">
+                <% for(var x=0; x<name.length;x++){ %>
+                    <p id=<%=x%>><%= name[x] %></p><img src='templates/gbag.jpg' id=<%=x%>>
+                    <% } %>
+            </div>
     </div>
 </body>
 </html>

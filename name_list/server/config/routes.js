@@ -4,6 +4,9 @@ module.exports=(app)=>{
         main_controller.index(req,res)
     })
     app.post('/',(req,res)=>{
-        main_controller.index(req,res)
+        main_controller.list(req,res)
+    }),
+    app.post('/delete',(req,res)=>{
+        main_controller.delete(req,res)
     })
 }

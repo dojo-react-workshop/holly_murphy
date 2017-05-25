@@ -6,20 +6,27 @@ module.exports=(()=>{
          //this.nameList: [],
 
         index: (req,res)=>{
-            var name = req.body.name
-            
-
-            //read through the directory and search for file
-            fs.readFile(process.cwd()+'\\text.txt','utf8',()=>{
-
-            })
+           // var name = req.body.name
             //if file is found, read in and write to array and then push the new value
-            nameList.push(name)
+            //nameList.push(name)
             //if not found, create and write name
-            res.render('index',{name: nameList})
+           res.render('index',{name: nameList})
+           //res.json(nameList)
         // },
         // info: (req,res)=>{
         //     res.render('info',req.body)
+    },
+        list:(req,res)=>{
+            var name = req.body.name
+            nameList.push(name)
+            res.json({name: nameList})
         }
+    ,
+    delete: (req,res)=>{
+        
+        var ind = req.body
+        console.log(ind)
+    }
+
     }
 })()

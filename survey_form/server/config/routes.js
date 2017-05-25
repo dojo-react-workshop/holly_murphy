@@ -3,7 +3,7 @@ module.exports=(app)=>{
     app.get('/',(req,res)=>{
         main_controller.index(req,res)
     })
-    app.post('/survey_info',(req,res)=>{
+    app.post('/',(req,res)=>{
         main_controller.info(req,res)
     })
     app.get('/result',(req,res)=>{
