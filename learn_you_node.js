@@ -208,6 +208,16 @@
 
 //   After sending the string, close the connection.
 
+//exercise 12
+const http = require('http')
+const fs=require('fs')
+let fileLocation = process.argv[3];
+
+let server = http.createServer(function (request, response){
+	fs.createReadStream(fileLocation).pipe(response);
+});
+
+server.listen(process.argv[2]);
 
 
 

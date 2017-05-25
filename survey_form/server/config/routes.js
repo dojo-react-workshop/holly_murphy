@@ -1,0 +1,9 @@
+main_controller=require('./../controller/main_controller')
+module.exports=(app)=>{
+    app.get('/',(req,res)=>{
+        main_controller.index(req,res)
+    })
+    app.post('/survey_info',(req,res)=>{
+        main_controller.info(req,res)
+    })
+}

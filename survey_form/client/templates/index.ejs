@@ -1,0 +1,31 @@
+<!doctype html>
+
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+
+  <title>Survey</title>
+  <!--<link rel="stylesheet" src='./survey.css'>
+    <script src="./survey.js"></script>-->
+<link rel="stylesheet" type="text/css" href="templates/survey.css">
+</head>
+
+<body>
+    <div id='container'>
+        <div id='form_contain'>
+            <form action='/survey_info' method='post'>
+                <p>Your Name:</p>
+                <input class='form_in' type='text' name='name'>
+                <p>Dojo Location:</p>
+                <input class='form_in' type='text' name='location'>
+                <p>Favorite Language:</p>
+                <input class='form_in' type='text' name='fav_lang'>
+                <p>Comment (optional):</p>
+                <textarea id='comment' type='text' name='comment' rows:'6'></textarea>
+                <button type='submit'>Submit</button>
+            
+            </form>
+        </div>
+    </div>
+</body>
+</html>
