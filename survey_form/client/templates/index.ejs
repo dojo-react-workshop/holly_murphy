@@ -17,9 +17,19 @@
                 <p>Your Name:</p>
                 <input class='form_in' type='text' name='name'>
                 <p>Dojo Location:</p>
-                <input class='form_in' type='text' name='location'>
+                <select class='form_in' name='location'>
+                    <option value="Mountain View">Mountain View</option>
+                    <option value="Milwaukee">Milwaukee</option>
+                    <option value="Seattle">Seattle</option>
+                    <option value="Chicago">Chicago</option>
+                </select>
                 <p>Favorite Language:</p>
-                <input class='form_in' type='text' name='fav_lang'>
+                <select class='form_in', name='fav_lang'>
+                    <option value="JS">JavaScript</option>
+                    <option value="Node">Node</option>
+                    <option value="Seattle">Java</option>
+                    <option value="Chicago">Ruby on Rails</option>
+                </select>
                 <p>Comment (optional):</p>
                 <textarea id='comment' type='text' name='comment' rows:'6'></textarea>
                 <button type='submit'>Submit</button>
