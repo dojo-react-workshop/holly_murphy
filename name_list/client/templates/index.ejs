@@ -1,0 +1,30 @@
+<!doctype html>
+
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+
+  <title>NameList</title>
+  <!--<link rel="stylesheet" src='./survey.css'>
+    <script src="./survey.js"></script>-->
+<link rel="stylesheet" type="text/css" href="templates/main.css">
+</head>
+
+<body>
+    <div id='container'>
+        <div id='form_contain'>
+            <form action='/' method='post'>
+                <p>Add Name:</p>
+                <input class='form_in' type='text' name='name'>
+                <button type='submit'>Submit</button>
+            
+            </form>
+        </div>
+        <div id='name_list'>
+            <% for(var x=0; x<name.length; x++){ %>
+            <p><%= name[x] %></p>
+            <% } %>
+        </div>
+    </div>
+</body>
+</html>

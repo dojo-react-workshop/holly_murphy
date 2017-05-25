@@ -1,25 +1,5 @@
-<!doctype html>
 
-<html lang="en">
-<head>
-  <meta charset="utf-8">
 
-  <title>Info</title>
- <link rel="stylesheet" type="text/css" href="templates/info.css">
- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
- <script>
-    $(document).ready(()=>{
-        $('#back').click(()=>{
-        location.href='/'
-    })
-    })
-    
- </script>
-
-</head>
-
-<body>
-    <div id='container'>
         <div id='info_contain'>
             <p id='heading'>Submitted Information</p>
             <p class='label'>Name:</p>
@@ -32,6 +12,3 @@
             <p class='data'><%= comment %></p>
             <button id="back">Go Back</button>
         </div>
-    </div>
-</body>
-</html>
