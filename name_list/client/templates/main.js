@@ -25,8 +25,6 @@ $(document).ready(function(){
             method: 'post',
             data: dataForServer,
             success:function(responseFromServer){
-                console.log(responseFromServer)
-                console.log(responseFromServer.name.length)
                 
                 let htmlTag=``
                for(var i=0; i<responseFromServer.name.length; i++){
@@ -44,13 +42,21 @@ $(document).ready(function(){
     $('#names_list').on('click','img',function(event){
         //post and remove from array (have to send the array)
         var ind=$(this).attr('id')
-        console.log(`index: ${ind} typeof: ${typeof ind}`)
+       // console.log(`index: ${ind} typeof: ${typeof ind}`)
         $.ajax({
             url:'/delete',
             method:'post',
-            data: ind,
+            data: {index:ind},
             success:function(del_response){
                 console.log(`delete response: ${del_response}`)
+             let htmlTag=``
+               for(var i=0; i<del_response.name.length; i++){
+                  htmlTag+=`<p id=${i}>${del_response.name[i]}</p><img src='templates/gbag.jpg' id=${i}>`
+               }
+
+               // const htmlTag=`<p>hello</p>`
+
+                $('#names_list').html(htmlTag)
             }
         })
     })

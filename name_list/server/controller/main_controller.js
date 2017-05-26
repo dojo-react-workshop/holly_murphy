@@ -24,8 +24,17 @@ module.exports=(()=>{
     ,
     delete: (req,res)=>{
         
-        var ind = req.body
-        console.log(ind)
+        console.log(`namelist: ${nameList}`)
+        let obj = req.body
+    
+        let index = obj.index
+        console.log(`ind ${index}`)
+        nameList.splice(index,1)
+        console.log(`namelist: ${nameList}`)
+        res.json({name:nameList})
+
+     
+
     }
 
     }
