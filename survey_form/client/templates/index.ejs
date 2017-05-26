@@ -7,6 +7,7 @@
   <title>Survey</title>
   <!--<link rel="stylesheet" src='./survey.css'>
     <script src="./survey.js"></script>-->
+    <script src="https://unpkg.com/axios/dist/axios.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.js"></script>
 <link rel="stylesheet" type="text/css" href="templates/survey.css">
 <script src='templates/main.js'></script>
@@ -15,7 +16,7 @@
 <body>
     <div id='container'>
         <div id='form_contain'>
-            <form action='/survey_info' method='post'>
+            <form action='/result' method='post'>
                 <p>Your Name:</p>
                 <input class='form_in' type='text' name='name'>
                 <p>Dojo Location:</p>

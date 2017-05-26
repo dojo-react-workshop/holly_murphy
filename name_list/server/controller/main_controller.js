@@ -27,6 +27,13 @@ module.exports=(()=>{
         let index = obj.index
         nameList.splice(index,1)
         res.json({name:nameList})
+    },
+    update:(req,res)=>{
+        let name=req.body.name//this is not the correct value
+        let index=req.body.index
+        nameList[index]=name
+        res.json({name:nameList})
+        console.log(`updatednamelist: ${nameList[index]}`)
     }
 
     }

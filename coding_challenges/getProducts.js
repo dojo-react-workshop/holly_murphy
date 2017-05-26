@@ -24,3 +24,5 @@ function getProducts(array){
     return finalProds
 }
 console.log(getProducts([1,2,3])) //[6,3,2]
+
+//responsive web design, promises implemented

@@ -8,5 +8,8 @@ module.exports=(app)=>{
     }),
     app.post('/delete',(req,res)=>{
         main_controller.delete(req,res)
+    }),
+    app.post('/update',(req,res)=>{
+        main_controller.update(req,res)
     })
 }

@@ -28,7 +28,7 @@ $(document).ready(function(){
                 
                 let htmlTag=``
                for(var i=0; i<responseFromServer.name.length; i++){
-                  htmlTag+=`<p id=${i}>${responseFromServer.name[i]}</p><img src='templates/gbag.jpg' id=${i}>`
+                  htmlTag+=`<div id=${i} class='div'><p class='name_class' id=${i}>${responseFromServer.name[i]}</p><img src='templates/gbag.jpg' id=${i}></div>`
                }
 
                // const htmlTag=`<p>hello</p>`
@@ -39,7 +39,7 @@ $(document).ready(function(){
     })//ajax
     )//form on
 
-    $('#names_list').on('click','img',function(event){
+    $('#names_list').on('click','.gbage',function(event){
         //post and remove from array (have to send the array)
         var ind=$(this).attr('id')
        // console.log(`index: ${ind} typeof: ${typeof ind}`)
@@ -51,7 +51,7 @@ $(document).ready(function(){
                 console.log(`delete response: ${del_response}`)
              let htmlTag=``
                for(var i=0; i<del_response.name.length; i++){
-                  htmlTag+=`<p id=${i}>${del_response.name[i]}</p><img src='templates/gbag.jpg' id=${i}>`
+                  htmlTag+=`<div id=${i} class='div'><p class='name_class' id=${i}>${del_response.name[i]}</p><img src='templates/gbag.jpg' id=${i} class='gbage'></div>`
                }
 
                // const htmlTag=`<p>hello</p>`
@@ -59,6 +59,43 @@ $(document).ready(function(){
                 $('#names_list').html(htmlTag)
             }
         })
+    })//end of delete
+    
+    ///this block of code replaces the name clicked with a text box and a plus image
+    $('#names_list').on('click','.name_class', function(){
+        var nam = this.innerHTML
+        const index = $(this).attr('id')
+        $(`#${index}`).html(`<div id=${index} class='nam_edit'><input type='text' id=${index} class='block' placeholder='${nam}'><img src='templates/plus.jpg' id=${index} class='plus_img block'></div>`)
     })
 
-})//on ready
+    //this block of code updates the array with the new text
+    $('#names_list').on('click','.plus_img',function(){
+        let nam_ind=$(this).attr('id')
+        const newNam = $(`input`).val()
+        const objToSendToServer={
+            name:`${newNam}`,
+            index:`${nam_ind}`
+        }
+        
+        $.ajax({
+            url:'/update',
+            method:'post',
+            data: objToSendToServer,
+            success:function(update_response){
+                console.log(`update_response: ${update_response}`)
+             let htmlTag=``
+               for(var i=0; i<update_response.name.length; i++){
+                  htmlTag+=`<div id=${i} class='div'><p class='name_class' id=${i}>${update_response.name[i]}</p><img src='templates/gbag.jpg' id=${i}></div>`
+               }
+
+               // const htmlTag=`<p>hello</p>`
+
+                $('#names_list').html(htmlTag)
+            }
+        })
+    })//end of update
+
+
+   
+})//end of on ready      
+ 

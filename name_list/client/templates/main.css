@@ -1,8 +1,8 @@
 img{
     height:25px;
     width: 25px;
-    margin-right:85%;
     margin-left:10px;
+    display: inline-block;
 }
 p{
     display:inline-block;
@@ -12,4 +12,25 @@ p{
 #container{
     display:inline-block;
     width:500px;
+}
+.div{
+    margin-top: 5px;
+    display:inline-block;
+    width:60%;
+}
+.plus_img{
+    display:inline-block;
+    margin:0;
+    margin-top: 10px;
+}
+input.block{
+    display:inline-block;
+    vertical-align:top;
+    margin-top:4%;
+}
+.block{
+    display:inline-block;
+}
+#nameslist{
+    display:inline-block;
 }
