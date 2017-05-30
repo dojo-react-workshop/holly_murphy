@@ -9,25 +9,30 @@
     <script src="./survey.js"></script>-->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="templates/main.js"></script>
+    <!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="templates/main.css">
 
 </head>
 
 <body>
-    <div id='container'>
-        <div id='form_contain'>
-            <form action='/' method='post'>
-                <p>Add Name:</p>
-                <input class='form_in' type='text' name='name'>
-                <button type='submit'>Submit</button>
-            
-            </form>
-        </div>
-         <div id="names_list">
-                <% for(var x=0; x<name.length;x++){ %>
-                    <div id=<%=x%> class='div'> <p class='name_class' id=<%=x%>><%= name[x] %></p><img src='templates/gbag.jpg' id=<%=x%> class='gbage'></div>
-                    <% } %>
+    <div id='my_container'>
+        <div id='container'>
+            <div id='row'>
+                <form action='/' method='post' class="form-inline">
+                    <div class="form-group">
+                        <h3>Add a name to the list:</h3>
+                        <input class="form-control" type='text' name='name' placeholder='Enter name'>
+                        <button type='submit' class="btn btn-primary">Submit</button>
+                    </div>
+                </form>
             </div>
+            <div id="names_list">
+                    <% for(var x=0; x<name.length;x++){ %>
+                        <div id=<%=x%> class='div row'> <p class='name_class' id=<%=x%>><%= name[x] %></p><img src='templates/gbag.jpg' id=<%=x%> class='gbage'></div>
+                        <% } %>
+                </div>
+        </div>
     </div>
 </body>
 </html>

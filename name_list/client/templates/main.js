@@ -28,7 +28,7 @@ $(document).ready(function(){
                 
                 let htmlTag=``
                for(var i=0; i<responseFromServer.name.length; i++){
-                  htmlTag+=`<div id=${i} class='div'><p class='name_class' id=${i}>${responseFromServer.name[i]}</p><img src='templates/gbag.jpg' id=${i} class='gbage'></div>`
+                  htmlTag+=`<div id=${i} class='div row'><div class='col-md-6'><p class='name_class' id=${i}>${responseFromServer.name[i]}</p></div><div class='col-md-6'><img src='templates/gbag.jpg' id=${i} class='gbage'></div></div>`
                }
 
                // const htmlTag=`<p>hello</p>`
@@ -52,7 +52,7 @@ $(document).ready(function(){
                 console.log(`delete response: ${del_response}`)
              let htmlTag=``
                for(var i=0; i<del_response.name.length; i++){
-                  htmlTag+=`<div id=${i} class='div'><p class='name_class' id=${i}>${del_response.name[i]}</p><img src='templates/gbag.jpg' id=${i} class='gbage'></div>`
+                  htmlTag+=`<div id=${i} class='div row'><div class='col-md-6'><p class='name_class' id=${i}>${del_response.name[i]}</p></div><img src='templates/gbag.jpg' id=${i} class='gbage'></div></div>`
                }
 
                // const htmlTag=`<p>hello</p>`
@@ -72,7 +72,7 @@ $(document).ready(function(){
        $('#names_list').off('click','.name_class', updateDisplay)
 
         //display the new name
-        $(`#${index}`).html(`<div id=${index} class='nam_edit'><input type='text' id=${index} class='block' placeholder='${nam}'><img src='templates/plus.jpg' id=${index} class='plus_img block'></div>`)
+        $(`#${index}`).html(`<div id=${index} class='nam_edit row'><div class='col-md-6'><input type='text' id=${index} class='block form-control' placeholder='${nam}'></div><div class='col-md-6'><img src='templates/plus.jpg' id=${index} class='plus_img block'></div></div>`)
         
     }
 
@@ -97,14 +97,14 @@ $(document).ready(function(){
                 console.log(`update_response: ${update_response}`)
              let htmlTag=``
                for(var i=0; i<update_response.name.length; i++){
-                  htmlTag+=`<div id=${i} class='div'><p class='name_class' id=${i}>${update_response.name[i]}</p><img src='templates/gbag.jpg' id=${i} class='gbage'></div>`
+                  htmlTag+=`<div id=${i} class='div row'><div class='col-md-6'><p class='name_class' id=${i}>${update_response.name[i]}</p></div><img src='templates/gbag.jpg' id=${i} class='gbage'></div></div>`
                }
                //turn on the event listners so user can edit other names
                $('#names_list').on('click','.name_class', updateDisplay) 
                // const htmlTag=`<p>hello</p>`
 
                 $('#names_list').html(htmlTag)
-            }
+            } 
         })
     })//end of update
 

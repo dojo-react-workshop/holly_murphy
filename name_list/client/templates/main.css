@@ -12,6 +12,13 @@ p{
 #container{
     display:inline-block;
     width:500px;
+    margin:0 auto;
+}
+#my_container{
+    width:750px;
+    height:500px;
+    margin :0 auto;
+    padding:50px;
 }
 .div{
     margin-top: 5px;
@@ -27,10 +34,17 @@ input.block{
     display:inline-block;
     vertical-align:top;
     margin-top:4%;
+    margin-left:25px;
 }
 .block{
     display:inline-block;
 }
 #nameslist{
     display:inline-block;
+}
+p.name_class{
+    margin-left:25px;
+}
+div.div{
+    margin-top:15px;
 }
