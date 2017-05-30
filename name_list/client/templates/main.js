@@ -14,11 +14,6 @@ $(document).ready(function(){
 
         const dataForServer = $(this).serialize()
 
-        //use ajax (async javascript request) to send http request to the server
-        // $.post('./survey_info',dataForServer,function(){
-        //     console.log('posted')
-        // })
-
         //ajax can take an object
         $.ajax({
             url:'/',
@@ -43,7 +38,6 @@ $(document).ready(function(){
     //function to delete
     function deleteNam(){
         var ind=$(this).attr('id')
-       // console.log(`index: ${ind} typeof: ${typeof ind}`)
         $.ajax({
             url:'/delete',
             method:'post',
@@ -54,9 +48,6 @@ $(document).ready(function(){
                for(var i=0; i<del_response.name.length; i++){
                   htmlTag+=`<div id=${i} class='div row'><div class='col-md-6'><p class='name_class' id=${i}>${del_response.name[i]}</p></div><img src='templates/gbag.jpg' id=${i} class='gbage'></div></div>`
                }
-
-               // const htmlTag=`<p>hello</p>`
-
                 $('#names_list').html(htmlTag)
             }
     })
@@ -82,7 +73,6 @@ $(document).ready(function(){
     //this block of code updates the array with the new text
     $('#names_list').on('click','.plus_img',function(){
         let nam_ind=$(this).attr('id')
-        //console.log(`index: ${nam_ind}`)
         const newNam = $(`input.block`).val()
         const objToSendToServer={
             name:`${newNam}`,
@@ -101,14 +91,9 @@ $(document).ready(function(){
                }
                //turn on the event listners so user can edit other names
                $('#names_list').on('click','.name_class', updateDisplay) 
-               // const htmlTag=`<p>hello</p>`
-
                 $('#names_list').html(htmlTag)
             } 
         })
-    })//end of update
-
-
-   
+    })//end of update 
 })//end of on ready      
  
