@@ -30,3 +30,4 @@ var terraceHeights_2=[3,1,5,2,6,4,2,3]
   //etc.
 //BREAK when current is = to max index
 //start again with right side : iterate backwards with the same type of process
+
