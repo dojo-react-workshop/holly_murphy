@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<script src="node_modules/react/dist/react.js"></script>
+    <script src="node_modules/react-dom/dist/react-dom.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.34/browser.min.js"></script>
+</head>
+<body>
+	<div id='app'></div>
+	<script type="text/babel">
+		'use strict'
+		const Square=(props)=>{
+			const style={
+				height:'200px',
+				width:'200px',
+				display: 'inline-block',
+				fontSize: '40px',
+				color:'white',
+				backgroundColor:'blue'
+			}
+			const txt=`${style.color} on ${style.backgroundColor}`
+			return React.createElement('div',{style: style}, txt)
+		}
+		ReactDOM.render(React.createElement(Square),document.getElementById('app'))
+	</script>
+</body>
+</html>
+
+<!-- 	const container=document.getElementById('app')
+
+		const BoxComponent = (props) =>{
+			const {myboxstyles} = props
+			const {txt} = props
+			const arr =[]
+			//const listItems = style.map()
+			console.log(`style: ${myboxstyles}`)
+			console.log(`txt: ${txt}`)
+
+			myboxstyles.map((obj,ind)=>{
+				arr.push(React.createElement('div',{style:{backgroundColor:`${obj.backgroundColor}`,color:`${obj.color}`}},txt[ind]))
+			})
+
+			return React.createElement('div',null,arr)
+		}
+
+		ReactDOM.render(React.createElement(BoxComponent, {
+			txt: ['white on blue', 'blue on red', 'green on pink'],
+			myboxstyles:[{backgroundColor:'blue', color:'white'},{backgroundColor:'red', color:'blue'},{backgroundColor:'pink', color:'green'}]
+		}), container) -->
+
