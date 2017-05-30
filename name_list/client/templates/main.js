@@ -73,7 +73,7 @@ $(document).ready(function(){
 
         //display the new name
         $(`#${index}`).html(`<div id=${index} class='nam_edit'><input type='text' id=${index} class='block' placeholder='${nam}'><img src='templates/plus.jpg' id=${index} class='plus_img block'></div>`)
-    
+        
     }
 
     ///this block of code calls the function that replaces the name clicked with a text box and a plus image
@@ -97,7 +97,7 @@ $(document).ready(function(){
                 console.log(`update_response: ${update_response}`)
              let htmlTag=``
                for(var i=0; i<update_response.name.length; i++){
-                  htmlTag+=`<div id=${i} class='div'><p class='name_class' id=${i}>${update_response.name[i]}</p><img src='templates/gbag.jpg' id=${i}></div>`
+                  htmlTag+=`<div id=${i} class='div'><p class='name_class' id=${i}>${update_response.name[i]}</p><img src='templates/gbag.jpg' id=${i} class='gbage'></div>`
                }
                //turn on the event listners so user can edit other names
                $('#names_list').on('click','.name_class', updateDisplay) 
