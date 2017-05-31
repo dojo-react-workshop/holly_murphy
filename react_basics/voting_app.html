@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title></title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <script src="https://unpkg.com/react@15/dist/react.js"></script>
+        <script src="https://unpkg.com/react-dom@15/dist/react-dom.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.34/browser.min.js"></script>
+    </head>
+    <style>
+        #app{
+            width: 795px;
+        }
+        h1{
+            text-align:center;
+            font-family:sans-serif;
+        }
+    </style>
+    <body>
+        <div id='app'></div>
+        <script type="text/babel">
+
+            const rects = [
+                    {   txt: 'React',
+                        img: './plus-sign.png'
+                    },
+                    {
+                        txt: 'Redux',
+                        img: './plus-sign.png'
+                    },
+                    {
+                        txt:'Node',
+                        img: './plus-sign.png'
+                    },
+                    {
+                        txt: 'Express',
+                        img: './plus-sign.png'
+                    }
+                ]
+
+            const Container = (props) => {
+
+                  const style = {
+                    height: '50px',
+                    width: '50px',
+                    display: 'inline-block'
+                };
+                const circleStyle = {
+                    borderRadius: '50%',
+                    width: '40px',
+                    height: '40px',
+                    background: '#ccc',
+                    border: '3px solid #000',
+                    display: 'inline-block',
+                    marginTop: '25px',
+                    marginLeft: '5px'
+                }
+                const pStyle = {
+                    display:'inline-block',
+                    width: '75px',
+                    paddingLeft: '10px',
+                    paddingTop: '10px',
+                    marginBottom: '25px',
+                    marginRight: '10px',
+                    verticalAlign: 'top',
+                    fontFamily: 'sans-serif',
+                    fontSize: '24px'
+                }
+                const divStyle ={
+                    display:'inline-block',
+                    width: '65%'
+                    
+                }
+                const outLine = {
+                    outline: 'black solid thin',
+                    width: '50%',
+                    margin: '0 auto'
+                }
+
+                console.log(`props: ${props.rects[1].txt}`)
+
+                const displayItems = props.rects.map((val, ind)=>{
+                    return <div style={divStyle}><div style={outLine}><div style={circleStyle}></div><p style={pStyle}>{val.txt}</p><img style={style} src={val.img}></img></div></div>
+                })
+                const headStyle={
+                    textAlign: 'center'
+                }
+
+                return (
+                    <div>
+                        <h1>Vote Your JS Library!</h1>
+                        <div style={headStyle}>{displayItems}</div>
+                    </div>
+                )
+            }
+
+        ReactDOM.render(
+        <Container rects={rects} />, 
+        document.getElementById('app')
+        );
+
+        </script>
+    </body>
+</html>
