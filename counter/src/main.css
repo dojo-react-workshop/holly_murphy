@@ -1,7 +1,15 @@
 #counter_wrapper{
-             outline: 'black thin solid';
-             width: '30%';
-             margin: '0 auto';
-             padding: '25px';
-             text-align: 'center';
+             outline: black thin solid;
+             width: 30%;
+             margin: 0 auto;
+             padding: 25px;
+             text-align: center;
+}
+.countTxtPStyle{
+            text-align: center;
+            font-size: 24px;
+        }
+.buttonStyle{
+            margin: 5px;
+            display: inline-block;
         }
