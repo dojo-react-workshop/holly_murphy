@@ -90,11 +90,16 @@
                     fontWeight: 'bold'
                 }
 
-                console.log(`props: ${props.rects[1].txt}`)
-                console.log(`${props.rects[1].count}`)
-
                 const displayItems = props.rects.map((val, ind)=>{
-                    return <div style={divStyle}><div style={outLine}><div style={circleStyle}><p style={pCircle}>{val.count}</p></div><p style={pStyle}>{val.txt}</p><img style={style} src={val.img}></img></div></div>
+                    return (<div style={divStyle}>
+                                <div style={outLine}>
+                                    <div style={circleStyle}>
+                                        <p style={pCircle}>{val.count}</p>
+                                    </div>
+                                    <p style={pStyle}>{val.txt}</p>
+                                    <img style={style} src={val.img} alt='plus sign'></img>
+                                </div>
+                            </div>)
                 })
                 const headStyle={
                     textAlign: 'center',
@@ -107,6 +112,10 @@
                         <div style={headStyle}>{displayItems}</div>
                     </div>
                 )
+            }
+
+            const Rectangle = (props) => {
+
             }
 
         ReactDOM.render(
