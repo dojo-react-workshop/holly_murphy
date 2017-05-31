@@ -23,19 +23,23 @@
 
             const rects = [
                     {   txt: 'React',
-                        img: './plus-sign.png'
+                        img: './plus-sign.png',
+                        count: 0
                     },
                     {
                         txt: 'Redux',
-                        img: './plus-sign.png'
+                        img: './plus-sign.png',
+                        count: 0
                     },
                     {
                         txt:'Node',
-                        img: './plus-sign.png'
+                        img: './plus-sign.png',
+                        count: 0
                     },
                     {
                         txt: 'Express',
-                        img: './plus-sign.png'
+                        img: './plus-sign.png',
+                        count: 0
                     }
                 ]
 
@@ -44,7 +48,8 @@
                   const style = {
                     height: '50px',
                     width: '50px',
-                    display: 'inline-block'
+                    display: 'inline-block',
+                    marginTop: '22px'
                 };
                 const circleStyle = {
                     borderRadius: '50%',
@@ -54,7 +59,8 @@
                     border: '3px solid #000',
                     display: 'inline-block',
                     marginTop: '25px',
-                    marginLeft: '5px'
+                    marginLeft: '5px',
+                    verticalAlign: 'top'
                 }
                 const pStyle = {
                     display:'inline-block',
@@ -65,7 +71,8 @@
                     marginRight: '10px',
                     verticalAlign: 'top',
                     fontFamily: 'sans-serif',
-                    fontSize: '24px'
+                    fontSize: '24px',
+                    color:'black'
                 }
                 const divStyle ={
                     display:'inline-block',
@@ -77,14 +84,21 @@
                     width: '50%',
                     margin: '0 auto'
                 }
+                const pCircle = {
+                    margin:'0 auto',
+                    marginTop: '10px',
+                    fontWeight: 'bold'
+                }
 
                 console.log(`props: ${props.rects[1].txt}`)
+                console.log(`${props.rects[1].count}`)
 
                 const displayItems = props.rects.map((val, ind)=>{
-                    return <div style={divStyle}><div style={outLine}><div style={circleStyle}></div><p style={pStyle}>{val.txt}</p><img style={style} src={val.img}></img></div></div>
+                    return <div style={divStyle}><div style={outLine}><div style={circleStyle}><p style={pCircle}>{val.count}</p></div><p style={pStyle}>{val.txt}</p><img style={style} src={val.img}></img></div></div>
                 })
                 const headStyle={
-                    textAlign: 'center'
+                    textAlign: 'center',
+                    color: 'white'
                 }
 
                 return (
