@@ -44,8 +44,27 @@
                 ]
 
             const Container = (props) => {
+                
+                const headStyle={
+                    textAlign: 'center',
+                    color: 'white'
+                }
 
-                  const style = {
+                const rectangle = props.rects.map((val, ind)=>{
+                    return <Rectangle rects={val} />
+                })
+                
+                return (
+                    <div>
+                        <h1>Vote Your JS Library!</h1>
+                        <div style={headStyle}>{rectangle}</div>
+                    </div>
+                )
+            }
+
+            const Rectangle = (props) => {
+                
+                 const style = {
                     height: '50px',
                     width: '50px',
                     display: 'inline-block',
@@ -89,33 +108,17 @@
                     marginTop: '10px',
                     fontWeight: 'bold'
                 }
-
-                const displayItems = props.rects.map((val, ind)=>{
-                    return (<div style={divStyle}>
-                                <div style={outLine}>
-                                    <div style={circleStyle}>
-                                        <p style={pCircle}>{val.count}</p>
-                                    </div>
-                                    <p style={pStyle}>{val.txt}</p>
-                                    <img style={style} src={val.img} alt='plus sign'></img>
-                                </div>
-                            </div>)
-                })
-                const headStyle={
-                    textAlign: 'center',
-                    color: 'white'
-                }
-
-                return (
-                    <div>
-                        <h1>Vote Your JS Library!</h1>
-                        <div style={headStyle}>{displayItems}</div>
-                    </div>
-                )
-            }
-
-            const Rectangle = (props) => {
-
+               
+            return (<div style={divStyle}>
+                        <div style={outLine}>
+                            <div style={circleStyle}>
+                                <p style={pCircle}>{props.rects.count}</p>
+                            </div>
+                            <p style={pStyle}>{props.rects.txt}</p>
+                            <img style={style} src={props.rects.img} alt='plus sign'></img>
+                        </div>
+                    </div>)
+               
             }
 
         ReactDOM.render(
