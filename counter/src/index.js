@@ -3,12 +3,31 @@ import ReactDOM from 'react-dom';
 import './main.css';
 
 class App extends React.Component{
+
+    state={
+            noOfCounters:1
+        }
+
+    addCounter = () =>{
+        this.setState((prevState)=>({
+            noOfCounters: prevState.noOfCounters + 1
+        }))
+    }
+
+    listOfCounters = () =>{
+        let counters = []
+        for(let x=0; x<this.state.noOfCounters; x++){
+            counters.push(<Counter key={x}/>)
+        } 
+        return counters
+    } 
     
+
     render(){
         return (
             <div>
-                <button>Add counter</button>
-                <Counter />
+                <button onClick={this.addCounter}>Add counter</button>
+                {this.listOfCounters()}
             </div>
         )
     }
@@ -19,8 +38,8 @@ class Counter extends React.Component{
         count:0
     }
     increment = () =>{
-        this.setState((prevState)=>({ 
-           count: prevState.count + 1
+        this.setState((prevState)=>({
+            count: prevState.count + 1
         }))
     }
     decrement = () =>{
@@ -30,7 +49,6 @@ class Counter extends React.Component{
     }
 
     render(){
-        console.log(`count: ${this.state.count}`)
         const countWrapperStyle = {
             outline: 'black thin solid',
             width: '30%',
