@@ -1,5 +1,6 @@
 import React from 'react';
 import Rectangle from './Rectangle'
+import './container.css'
 
  export class Container extends React.Component {
 
@@ -34,9 +35,6 @@ import Rectangle from './Rectangle'
             prevState.rectangles.find(x => x.name === name).count++
          })
     }
-
-    
-
     render=()=>{
         //sort array before mapping over
         let {rectangles} = this.state
@@ -50,7 +48,7 @@ import Rectangle from './Rectangle'
             }
             return 0
         })
-        
+        //map over in the render so that when the state is changed/updated, your display references the new order
         const rectangle = this.state.rectangles.map((val, ind)=>{
             //this.state.rectangles.push(<Rectangle rects={val} key={ind} />)
             return <Rectangle rects={val} key={ind} increment={this.incCount} />
