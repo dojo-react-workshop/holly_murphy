@@ -32,3 +32,8 @@ p{
 .noWinner{
     width:75%;
 }
+.plays{
+    outline: black dotted thin;
+    display:relative;
+    left: 300px;
+}
