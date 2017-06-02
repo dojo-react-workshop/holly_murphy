@@ -4,7 +4,6 @@ import square from './square.css'
 class Square extends Component {
   render() {
 
-    let letter = this.props.xOrO
     let arrOfBoxes = []
     const update = (e)=>{
         this.props.updateXOrO(e.target.id)
@@ -13,16 +12,15 @@ class Square extends Component {
     // do check if game is over
     const checkWinner = () =>{
         let winnerArray = []
-        let condOne, condTwo, condThree, condFour, condFive, condSix, condSeven, condEight 
 
-        winnerArray.push(condOne = winner(0,1,2))
-        winnerArray.push(condTwo = winner(3,4,5))
-        winnerArray.push(condTwo = winner(6,7,8))
-        winnerArray.push(condTwo = winner(0,3,6))
-        winnerArray.push(condTwo = winner(1,4,7))
-        winnerArray.push(condTwo = winner(2,5,8))
-        winnerArray.push(condTwo = winner(0,4,8))
-        winnerArray.push(condTwo = winner(2,4,6))
+        winnerArray.push(winner(0,1,2))
+        winnerArray.push(winner(3,4,5))
+        winnerArray.push(winner(6,7,8))
+        winnerArray.push(winner(0,3,6))
+        winnerArray.push(winner(1,4,7))
+        winnerArray.push(winner(2,5,8))
+        winnerArray.push(winner(0,4,8))
+        winnerArray.push(winner(2,4,6))
 
         for(let x=0; x<9; x++){
             if(winnerArray[x] === 'X' || winnerArray[x] === 'O'){
@@ -61,9 +59,10 @@ class Square extends Component {
     return 'no winner'
   }//end of winner
 
-
-    if(checkWinner() === 'X' || checkWinner() === 'O'){
-        arrOfBoxes.push(<div className="winner">{checkWinner()} Won!</div>)
+    if(this.props.plays === 9 && (checkWinner() !== 'X' || checkWinner() !== 'Y')){
+        arrOfBoxes.push(arrOfBoxes.push(<div key = '0' className="noWinner">No one wins. Game Over!</div>))
+    }else if(checkWinner() === 'X' || checkWinner() === 'O'){
+        arrOfBoxes.push(<div className="winner" key='0'>{checkWinner()} Won!</div>)
     }else{
         arrOfBoxes.push(<div id='player'>Next player: {this.props.xOrO}</div>)
         for(let x=0; x<9; x++){
