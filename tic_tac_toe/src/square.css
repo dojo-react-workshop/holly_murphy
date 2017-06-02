@@ -17,4 +17,15 @@
     outline: black thin solid;
     display:inline-block;
     vertical-align:top;
+    text-align:center;
+}
+p{
+    margin-top:15px;
+}
+#player{
+    margin-bottom: 5px;
+}
+.winner{
+    font-weight:bold;
+    text-align:center;
 }

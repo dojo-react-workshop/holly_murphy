@@ -12,20 +12,24 @@ class Square extends Component {
         console.log(e.target.id)
         this.props.updateXOrO(e.target.id)
     }
-    for(let x=0; x<9; x++){
-        if(this.props.board[x] === 'X'){
-            arrOfBoxes.push(<div className="square" key={x} id={x} onClick={update}>X</div>)
-        }else if(this.props.board[x] === 'O'){
-            arrOfBoxes.push(<div className="square" key={x} id={x} onClick={update}>O</div>)
-        }else if (this.props.board[x] === ''){
-            arrOfBoxes.push(<div className="square" key={x} id={x} onClick={update}></div>)
+    if(this.props.game === 'X' || this.props.game === 'O'){
+        arrOfBoxes.push(<div className="winner">{this.props.game} Won!</div>)
+    }else{
+        arrOfBoxes.push(<div id='player'>Next player: {this.props.xOrO}</div>)
+        for(let x=0; x<9; x++){
+            if(this.props.board[x] === 'X'){
+                arrOfBoxes.push(<div className="square" key={x} id={x} onClick={update}><p>X</p></div>)
+            }else if(this.props.board[x] === 'O'){
+                arrOfBoxes.push(<div className="square" key={x} id={x} onClick={update}><p>O</p></div>)
+            }else if (this.props.board[x] === ''){
+                arrOfBoxes.push(<div className="square" key={x} id={x} onClick={update}></div>)
+            }
+            
         }
-        
-    }
+}
 
     return (
         <div className="container">
-            <div>Next player: {this.props.xOrO}</div>
             {arrOfBoxes}
         </div>
       
