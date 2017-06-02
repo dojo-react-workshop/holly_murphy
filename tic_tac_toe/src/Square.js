@@ -67,9 +67,9 @@ class Square extends Component {
         arrOfBoxes.push(<div id='player'>Next player: {this.props.xOrO}</div>)
         for(let x=0; x<9; x++){
             if(this.props.board[x] === 'X'){
-                arrOfBoxes.push(<div className="square" key={x} id={x} onClick={update}><p>X</p></div>)
+                arrOfBoxes.push(<div className="square" key={x} id={x}><p>X</p></div>)
             }else if(this.props.board[x] === 'O'){
-                arrOfBoxes.push(<div className="square" key={x} id={x} onClick={update}><p>O</p></div>)
+                arrOfBoxes.push(<div className="square" key={x} id={x}><p>O</p></div>)
             }else if (this.props.board[x] === ''){
                 arrOfBoxes.push(<div className="square" key={x} id={x} onClick={update}></div>)
             }
