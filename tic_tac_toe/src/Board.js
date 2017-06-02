@@ -12,15 +12,19 @@ class Board extends Component {
     //update your state 
         if(this.state.xOrO === 'X'){
           this.setState((prevstate)=>{
-            prevstate.xOrO= 'O',
-            prevstate.board[id]='X',
-            prevstate.plays=prevstate.plays+1
+            let newState = {...prevstate}
+            newState.xOrO = 'O',
+            newState.board[id]='X',
+            newState.plays=prevstate.plays+1
+            return newState
           })
         }else{
           this.setState((prevstate)=>{
-            prevstate.xOrO= 'X',
-            prevstate.board[id]='O',
-            prevstate.plays=prevstate.plays+1
+            let newState = {...prevstate}
+            newState.xOrO = 'X',
+            newState.board[id]='O',
+            newState.plays=prevstate.plays+1
+            return newState
           })
         }
    }
