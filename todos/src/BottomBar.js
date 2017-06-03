@@ -3,7 +3,6 @@ import React, { Component } from 'react';
 class BottomBar extends Component {
 
     filter=(e) =>{
-      console.log(`target: `,e.target.text)
       this.props.setFilter(e.target.text)
     }
 
@@ -26,13 +25,21 @@ class BottomBar extends Component {
       }   
     }
 
-  render() {
+    itemsLeft=()=>{
+      let count=0
+      for(let x=0; x<this.props.data.items.length; x++){
+        if(this.props.data.items[x].completed===false){
+          count+=1
+        }
+      }
+      return count
+    }
 
-      console.log(`in bb - filter: `,this.props.data.filter)
+  render() {
 
     return (
         <footer className='footer'> 
-         <span className='todo-count'><strong>{this.props.data.items.length}</strong> items left</span>
+         <span className='todo-count'><strong>{this.itemsLeft()}</strong> items left</span>
          {this.filterDisp()}
         <button className='clear-completed' onClick={this.props.clearCompleted}>Clear completed</button>
         </footer>

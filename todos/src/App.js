@@ -14,7 +14,7 @@ class App extends Component {
             { id: 3, text: "Profit", completed: false, editable: false}
         ],
         filter: 'All',
-        newTodoText:'',
+        displayTxt:'',
         completedToggle: false
     }
 
@@ -26,11 +26,21 @@ class App extends Component {
             newState={...prev}
 
             //find the last id in the curr state to generate the next
+            //if no items exist in the list, set id to 1
+            if(newState.items.length===0){
+              newState.items.push({
+                id: 1,
+                text: txt,
+                completed: false
+              })
+            }else{
             newState.items.push({
                 id: prev.items[prev.items.length-1].id + 1,
                 text: txt,
                 completed: false
             })
+          }
+          newState.displayTxt=''
             return newState
         })
     }
@@ -38,11 +48,15 @@ class App extends Component {
     //update a todo
     updateTodo=(txt, id)=>{
       this.setState((prev)=>{
-        let newState = {} 
-        newState = {}
-        newState={...prev}
-
-       // newState.items[id-1].text = txt
+        let newState = { ...prev } 
+        let ind
+        //find the index where the ids match
+        ind = newState.items.findIndex((val,ind)=>{
+          return val.id == id;
+        })
+        //update the text to the entered text and set the editable back to false
+        newState.items[ind].text=txt
+        newState.items[ind].editable=false
 
         return newState
       })
@@ -140,6 +154,28 @@ class App extends Component {
           })
       }
 
+      updateDisplayTxt=(txt)=>{
+        this.setState((prev)=>{
+          let newState={ ...prev }
+          newState.displayTxt=txt
+
+          return newState
+        })
+      }
+
+      handleBlur=(id)=>{
+        this.setState((prev)=>{
+          let newState={ ...prev }
+          let ind;
+          ind=newState.items.findIndex((val)=>{
+            return val.id==id;
+          })
+          newState.items[ind].editable=false
+
+          return newState
+          })          
+      }
+
 
 
   render() {
@@ -149,9 +185,9 @@ class App extends Component {
       <section className='todoapp'>
         <div >
             <header className='header'><h1>todos</h1>
-              <TodoEntry addTodo={this.addTodo} markAllComplete={this.markAllComplete} />
+              <TodoEntry data={this.state} updateDisplayTxt={this.updateDisplayTxt} addTodo={this.addTodo} markAllComplete={this.markAllComplete} />
             </header>
-            <TodoList makeEditable={this.makeEditable} data={this.state} updateTodo={this.updateTodo} removeTodo={this.removeTodo} makeComplete={this.makeComplete} />
+            <TodoList handleBlur={this.handleBlur} makeEditable={this.makeEditable} data={this.state} updateTodo={this.updateTodo} removeTodo={this.removeTodo} makeComplete={this.makeComplete} />
            <BottomBar data={this.state} clearCompleted={this.clearCompleted} setFilter={this.setFilter}/>
         </div>
      </section>

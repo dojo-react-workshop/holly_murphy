@@ -13,6 +13,16 @@ class TodoListItem extends Component {
         this.props.makeComplete(e.target.id)
     }
 
+    updateTodo=(e)=>{
+        if(e.keyCode === 13){
+            this.props.updateTodo(e.target.value,e.target.id)
+        }
+    }
+
+    handleBlur=(e)=>{
+        this.props.handleBlur(e.target.id)
+    }
+
   render() {
     let list=[];
     let liClass = '';
@@ -44,27 +54,23 @@ class TodoListItem extends Component {
             if(val.editable === true){
                list.push(
                     <div key={ind} >
-                        <li className='editing'>
-                            <div className='view'> 
-                                
-                                <label id={val.id} >{val.text}</label>
-                                <button id={val.id} className='destroy' onClick={this.removeTodo}></button>
-                            </div>
+                        <li className='edit'>
+                            <input id={val.id} className='toggle' type='checkbox' checked={val.completed} onClick={this.makeComplete} />
+                            <input className='new-todo' id={val.id} onKeyDown={this.updateTodo} placeholder={val.text} onBlur={this.handleBlur} />
                         </li>
                     </div>
                 )//list.push 
             }//if
             else{
                 list.push(
-                    <div key={ind} >
-                        <li className={liClass}>
+                        <li className={liClass} key={ind}>
                             <div className='view'> 
-                                <input id={val.id} className='toggle' type='checkbox' checked={val.completed} onClick={this.makeComplete}/>
+                                <input id={val.id} className='toggle' type='checkbox' defaultChecked={val.completed} onClick={this.makeComplete}/>
                                 <label id={val.id} onDoubleClick={this.makeEditable}>{val.text}</label>
                                 <button id={val.id} className='destroy' onClick={this.removeTodo}></button>
                             </div>
                         </li>
-                    </div>
+                   
                 )//list.push
             }
             
