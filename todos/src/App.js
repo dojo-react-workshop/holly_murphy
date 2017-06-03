@@ -9,12 +9,13 @@ class App extends Component {
 
     state={
         items: [
-            { id: 1, text: "Learn React", completed: true},
-            { id: 2, text: "Build a todo app", completed: false},
-            { id: 3, text: "Profit", completed: false}
+            { id: 1, text: "Learn React", completed: true, editable: false},
+            { id: 2, text: "Build a todo app", completed: false, editable: false},
+            { id: 3, text: "Profit", completed: false, editable: false}
         ],
-        filter: 'all',
-        newTodoText:''
+        filter: 'All',
+        newTodoText:'',
+        completedToggle: false
     }
 
     //add a Todo list item
@@ -50,7 +51,6 @@ class App extends Component {
     //remove a todo list item
     removeTodo =(id)=>{
       this.setState((prev)=>{
-        console.log(`splice: ${id-1}`)
         let newState = {} 
         let ind;
         newState = {}
@@ -66,6 +66,80 @@ class App extends Component {
       })
     }
 
+    //check an item as complete and cross out by updating completed to true for the appropriate id passed in
+    //or vice versa
+
+    makeComplete=(id)=>{
+      this.setState((prev)=>{
+        let newState={...prev};
+        let ind;
+        //find the index where the ids match
+        ind = newState.items.findIndex((val,ind)=>{
+          return val.id == id;
+        })
+        //check what it was and make it the opposite
+        if(newState.items[ind].completed === true){
+          newState.items[ind].completed = false;
+        }else{
+          newState.items[ind].completed = true;
+        }
+        return newState;
+      })
+    }
+    //clear completed items (filter the completed items out of the list)
+    clearCompleted=()=>{
+      this.setState((prev)=>{
+        let newState={...prev};
+        newState.items=newState.items.filter((val)=>{
+          return val.completed===false;
+        })
+        return newState;
+      })
+    }
+     
+      //filter list based on selection
+      setFilter=(filt)=>{
+        this.setState((prev)=>{
+          let newState={...prev}
+          newState.filter=filt
+          return newState
+        })//setState
+      }//setFilter
+
+      //mark all complete or incomplete
+      markAllComplete=()=>{
+        this.setState((prev)=>{
+          let newState={ ...prev }
+          if(newState.completedToggle === true){
+            //update all items completed to false and completedToggle to false
+            newState.items = newState.items.forEach((val)=>{
+              return val.completed=false
+            })//forEach
+            newState.completedToggle=false
+          }//if
+          else{
+            newState.items = newState.items.forEach((val)=>{
+              return val.completed=true
+            })//forEach
+            newState.completedToggle=true
+          }//else
+          return newState
+        })
+      }
+
+      makeEditable=(id)=>{
+          this.setState((prev)=>{
+          let newState={...prev};
+          let ind;
+          //find the index where the ids match
+          ind = newState.items.findIndex((val,ind)=>{
+            return val.id == id;
+          })
+          newState.items[ind].editable=true
+          return newState;
+          })
+      }
+
 
 
   render() {
@@ -74,10 +148,11 @@ class App extends Component {
     return (
       <section className='todoapp'>
         <div >
-            <header className='header'><h1>todos</h1></header>
-            <section className='todoapp'><TodoEntry addTodo={this.addTodo} /></section>
-            <TodoList data={this.state} updateTodo={this.updateTodo} removeTodo={this.removeTodo} />
-           <BottomBar />
+            <header className='header'><h1>todos</h1>
+              <TodoEntry addTodo={this.addTodo} markAllComplete={this.markAllComplete} />
+            </header>
+            <TodoList makeEditable={this.makeEditable} data={this.state} updateTodo={this.updateTodo} removeTodo={this.removeTodo} makeComplete={this.makeComplete} />
+           <BottomBar data={this.state} clearCompleted={this.clearCompleted} setFilter={this.setFilter}/>
         </div>
      </section>
     );

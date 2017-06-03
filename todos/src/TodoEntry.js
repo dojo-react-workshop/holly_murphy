@@ -13,10 +13,11 @@ class TodoEntry extends Component {
   render() {
 
     return (
-      <header className='header'>
-        <input className='toggle-all' type='checkbox' />
-        <input type='search'  className='new-todo' placeholder='What needs to be done?' onKeyDown={this.addTodo} />
-      </header>
+     
+        <section className='main'>
+          <input type='search'  className='new-todo' placeholder='What needs to be done?' onKeyDown={this.addTodo} />
+        </section>
+    
     );
   }
 }
