@@ -11,55 +11,61 @@ class App extends Component {
     //holds board with one light at a time
     toLight: [false,false,false,false,false,false,false,false,false,false,false,false],
     //saved random generated lit sequence
-    litSequence:[false,false,false,false,false,false,false,false,false,false,false,false],
+    litSequence:[],
     //user selected sequence
     userSelect:[],
     gameState:'start',
     secondsRemaining:0,
-    lightSecondsRemaining:4
+    litSecondsRemaining:0
   }
     
     //updates secondsRemaining
     tick = ()=>{
         if (this.state.secondsRemaining <= 0) {
-            
-            this.setState((prev)=>{
-              let newState= { ...prev }
-              newState.gameState = 'playing'
-
-              //display a sequence of four tiles
-              let rand = Math.floor(Math.random() * 6) + 1
-              this.interval = setInterval(this.light(rand),250);
-              return newState
-            })
-            clearInterval(this.interval);
+          clearInterval(this.interval)
+          this.startLightTimer()
         }else{
           this.setState({secondsRemaining: this.state.secondsRemaining - 1});
         }
     }
 
     //light a box
-    light=(boxToLight)=>{
-      //check if time is up
-      if(this.state.lightSecondsRemaining <= 0){
+    light=()=>{
+      if(this.state.litSecondsRemaining <= 0){
         clearInterval(this.interval)
+        this.setState((prev)=>{
+          let newState={ ...prev }
+          newState.gameState='waitForPlayer'
+          return newState;
+        })
       }
-      console.log(`in light function, boxToLight: `, boxToLight)
+      else{
+      console.log(`in light()`);
+      let rand=Math.floor(Math.random()*11)+0
       this.setState((prev)=>{
         let newState = { ...prev }
         // loop through and set the rand determined box to true
         for(let x=0; x<newState.toLight.length; x++){
-            console.log(`x: ${x}; boxToLight: ${boxToLight}`)
-          if(x === boxToLight-1){
-            console.log(`made it in the if condition`)
+          console.log(`in for loop: ${rand}`)
+          if(x === rand){
             newState.toLight[x] = true
           }//if
         }//for
-        newState.lightSecondsRemaining=newState.lightSecondsRemaining-1
-
+        newState.litSequence.push(rand)
+        newState.litSecondsRemaining=newState.litSecondsRemaining-1
         return newState
       })//setState
+      }
     }//light()
+
+    startLightTimer=()=>{
+      this.setState((prev)=>{
+        let newState= { ...prev }
+        newState.litSecondsRemaining=4;
+        this.interval = setInterval(this.light,500);
+        return newState
+      })
+    }
 
     //startTimer will set the interval to 3 seconds and will call tick to reset the state which will cause a render()
     startTimer=()=>{
