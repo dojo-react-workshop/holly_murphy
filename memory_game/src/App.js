@@ -103,6 +103,8 @@ class App extends Component {
           if(ind<0){
             newState.playerStatus = 'Winner';
             newState.toLight=[false,false,false,false,false,false,false,false,false,false,false,false];
+            newState.litSequence=[];
+            newState.userSelection=[];
           }else{
             newState.playerStatus = 'Loser';
             //and clear the board to restart game
