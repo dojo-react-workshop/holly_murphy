@@ -13,10 +13,11 @@ class App extends Component {
     //saved random generated lit sequence
     litSequence:[],
     //user selected sequence
-    userSelect:[],
+    userSelection:[],
     gameState:'start',
     secondsRemaining:0,
-    litSecondsRemaining:0
+    litSecondsRemaining:0,
+    playerStatus: ''
   }
     
     //updates secondsRemaining
@@ -35,18 +36,18 @@ class App extends Component {
         clearInterval(this.interval)
         this.setState((prev)=>{
           let newState={ ...prev }
-          newState.gameState='waitForPlayer'
+          newState.gameState='waitForPlayer';
+          newState.toLight=[false,false,false,false,false,false,false,false,false,false,false,false];
           return newState;
         })
       }
       else{
-      console.log(`in light()`);
       let rand=Math.floor(Math.random()*11)+0
       this.setState((prev)=>{
         let newState = { ...prev }
+        newState.toLight = Array.from(newState.lit)
         // loop through and set the rand determined box to true
         for(let x=0; x<newState.toLight.length; x++){
-          console.log(`in for loop: ${rand}`)
           if(x === rand){
             newState.toLight[x] = true
           }//if
@@ -78,6 +79,49 @@ class App extends Component {
         })
     }
 
+    //this function pushes the ID of the box the player touched to an array
+    recordTouch=(id)=>{
+      this.setState((prev)=>{
+        let newState = { ...prev };
+                
+        //check if the user selection is the last one available for the user
+        if(newState.userSelection.length === newState.litSequence.length-1){
+          newState.userSelection.push(id);
+          newState.gameState='playAgain'
+          //check if the user was correct
+          let flags=[]
+          for(let x=0; x<newState.litSequence.length; x++){
+            if(newState.litSequence[x] == newState.userSelection[x]){
+              flags.push(true)
+            }else{
+              flags.push(false)
+            }
+          }//end for
+          let ind = flags.findIndex((val)=>{
+            return val===false
+          })
+          if(ind<0){
+            newState.playerStatus = 'Winner';
+            newState.toLight=[false,false,false,false,false,false,false,false,false,false,false,false];
+          }else{
+            newState.playerStatus = 'Loser';
+            //and clear the board to restart game
+            //plain board
+            newState.toLight=[false,false,false,false,false,false,false,false,false,false,false,false];
+            newState.litSequence=[];
+            newState.userSelection=[];
+          }
+          //if it wasn't the last selection, allow the user to continue selecting
+        }else{
+          newState.userSelection.push(id);
+          newState.toLight[id]=true
+        }
+
+        return newState;
+      })
+
+    }
+
 
   render() {
     let disp=''
@@ -87,15 +131,18 @@ class App extends Component {
       }else if(this.state.gameState === 'inProgress'){
           disp=<div>Seconds Remaining: <span className='bold'>{this.state.secondsRemaining}</span></div>
       }else if(this.state.gameState === 'playAgain'){
-          disp=<button type='button' className="btn btn-primary" onClick={this.startTimer}>Play Again</button>
+          disp=(<div><button type='button' className="btn btn-primary" onClick={this.startTimer}>Play Again</button>
+          <p>You are a {this.state.playerStatus}!</p></div>)
       }else if(this.state.gameState === 'playing'){
+          disp=<div>Guess the correct cells!</div>
+      }else if(this.state.gameState === 'waitForPlayer'){
           disp=<div>Guess the correct cells!</div>
       }
 
     return (
       <div className="App">
         <h1>Memory Game</h1>
-        <Box data={this.state} />
+        <Box data={this.state} recordTouch={this.recordTouch} />
         <div>{disp}</div>
         {/*<div><BottomBar data={this.state.gameState} countDown={this.countDown} /></div>*/}
       </div>

@@ -15,7 +15,7 @@
     display: inline-block;
 }
 .lit_box{
-    background-color: yellow;
+    background-color: gold;
     border: 2px solid;
     border-radius: 25px;
     width:150px;
@@ -24,4 +24,15 @@
     display: inline-block;
     margin-right: 2px;
     margin-left: 2px;
+}
+.player_selected{
+   background-color: blueviolet;
+    border: 2px solid;
+    border-radius: 25px;
+    width:150px;
+    height:150px;
+    box-shadow: 3px 3px grey;
+    display: inline-block;
+    margin-right: 2px;
+    margin-left: 2px; 
 }
