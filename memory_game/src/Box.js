@@ -16,7 +16,7 @@ class Box extends Component {
       if(this.props.data.gameState==='waitForPlayer'){
         for(let x=0; x<this.props.data.toLight.length; x++){
             if(this.props.data.toLight[x] === true){
-                boxes.push(<div key={x} className='player_selected' onClick={this.recordTouch}></div>)
+                boxes.push(<div key={x} id={x} className='player_selected' onClick={this.recordTouch}></div>)
             }else{
                 boxes.push(<div key={x} id={x} className='box' onClick={this.recordTouch}></div>)
             }

@@ -17,7 +17,8 @@ class App extends Component {
     gameState:'start',
     secondsRemaining:0,
     litSecondsRemaining:0,
-    playerStatus: ''
+    playerStatus: '',
+    noToLight:1
   }
     
     //updates secondsRemaining
@@ -37,6 +38,7 @@ class App extends Component {
         this.setState((prev)=>{
           let newState={ ...prev }
           newState.gameState='waitForPlayer';
+          newState.noToLight=newState.noToLight+1;
           newState.toLight=[false,false,false,false,false,false,false,false,false,false,false,false];
           return newState;
         })
@@ -47,7 +49,7 @@ class App extends Component {
         let newState = { ...prev }
         newState.toLight = Array.from(newState.lit)
         // loop through and set the rand determined box to true
-        for(let x=0; x<newState.toLight.length; x++){
+        for(let x=0; x<newState.lit.length; x++){
           if(x === rand){
             newState.toLight[x] = true
           }//if
@@ -62,18 +64,39 @@ class App extends Component {
     startLightTimer=()=>{
       this.setState((prev)=>{
         let newState= { ...prev }
-        newState.litSecondsRemaining=4;
+        newState.litSecondsRemaining=newState.noToLight;
         this.interval = setInterval(this.light,500);
         return newState
+      })
+    }
+
+    //call this function to continue game
+    continueGame=()=>{
+      let myProm = new Promise((resolve, reject) =>{
+        this.setState((prev)=>{
+          let newState = { ...prev }
+          newState.toLight=[false,false,false,false,false,false,false,false,false,false,false,false];
+          newState.litSequence=[];
+          newState.userSelection=[];
+          newState.litSecondsRemaining=0;
+          newState.playerStatus='';
+          return newState;
+        })//setState
+        resolve()
+      })//promise
+      .then(()=>{
+        this.startTimer();
       })
     }
 
     //startTimer will set the interval to 3 seconds and will call tick to reset the state which will cause a render()
     startTimer=()=>{
         this.setState((prev)=>{
+          
           let newState = { ...prev }
           newState.secondsRemaining=3;
           newState.gameState= 'inProgress';
+          
           this.interval = setInterval(this.tick,1000);
           return newState;
         })
@@ -85,12 +108,13 @@ class App extends Component {
         let newState = { ...prev };
                 
         //check if the user selection is the last one available for the user
-        if(newState.userSelection.length === newState.litSequence.length-1){
-          newState.userSelection.push(id);
-          newState.gameState='playAgain'
+        if(newState.userSelection.length+1 === newState.litSequence.length){
+          // newState.userSelection.push(id);
+          
           //check if the user was correct
           let flags=[]
-          for(let x=0; x<newState.litSequence.length; x++){
+          for(let x=0; x<newState.litSequence.length-1; x++){
+            //if there is only one in the sequence
             if(newState.litSequence[x] == newState.userSelection[x]){
               flags.push(true)
             }else{
@@ -100,11 +124,8 @@ class App extends Component {
           let ind = flags.findIndex((val)=>{
             return val===false
           })
-          if(ind<0){
-            newState.playerStatus = 'Winner';
-            newState.toLight=[false,false,false,false,false,false,false,false,false,false,false,false];
-            newState.litSequence=[];
-            newState.userSelection=[];
+         if(ind<0 && (newState.litSequence[newState.litSequence.length-1] == id)){
+            this.continueGame();
           }else{
             newState.playerStatus = 'Loser';
             //and clear the board to restart game
@@ -112,13 +133,14 @@ class App extends Component {
             newState.toLight=[false,false,false,false,false,false,false,false,false,false,false,false];
             newState.litSequence=[];
             newState.userSelection=[];
+            newState.noToLight=1;
+            newState.gameState='playAgain'
           }
           //if it wasn't the last selection, allow the user to continue selecting
         }else{
           newState.userSelection.push(id);
           newState.toLight[id]=true
         }
-
         return newState;
       })
 
