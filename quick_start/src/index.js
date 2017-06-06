@@ -1,8 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import Sidebar from './Sidebar';
+import ModalGallery from './ModalGallery';
 import registerServiceWorker from './registerServiceWorker';
 import './index.css';
 
-ReactDOM.render(<Sidebar />, document.getElementById('root'));
+ReactDOM.render(<ModalGallery />, document.getElementById('root'));
 registerServiceWorker();
