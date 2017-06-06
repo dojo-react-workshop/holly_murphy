@@ -19,6 +19,7 @@ class App extends Component {
         this.setState((prev)=>{
           let newState={ ...prev }
           newState.data = response.data
+          newState.repos=[]
           return newState
         })
       })
