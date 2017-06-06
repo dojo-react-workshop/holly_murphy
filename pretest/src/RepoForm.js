@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import './repo_form.css'
 import PropTypes from 'prop-types'
 
 class RepoForm extends Component {
@@ -31,7 +30,11 @@ class RepoForm extends Component {
     return (
       <div className="repo_form">
         <form onSubmit={this.handleSubmit}>
-            <label>User Search: </label><input type="text"  onKeyDown={this.handleChange} onChange={this.handleChange}  value={this.state.username} /><br />
+            <div className='row'>
+                <div className='large-4 columns'>
+                    <label>User Search: </label><input type="text"  onKeyDown={this.handleChange} onChange={this.handleChange}  placeholder='Username' value={this.state.username} /><br />
+                </div>
+            </div>
         </form>
 
       </div>

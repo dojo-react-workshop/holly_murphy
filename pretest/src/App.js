@@ -39,7 +39,9 @@ class App extends Component {
     return (
       <div className="App">
         <RepoForm fetchUsers={this.fetchUsers}/>
-        <UserList users={this.state.data.items} fetchRepos={this.fetchRepos} repos={this.state.repos} />
+        <div >
+          <UserList users={this.state.data.items} fetchRepos={this.fetchRepos} repos={this.state.repos} />
+          </div>
       </div>
     ) 
   }

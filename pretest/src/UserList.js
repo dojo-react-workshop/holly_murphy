@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import './repo_form.css'
 import PropTypes from 'prop-types'
-import './user_list.css'
 import {
   BrowserRouter as Router,
   Route,
@@ -20,7 +19,7 @@ class UserList extends Component {
     let disp=''
     if(this.props.users != null){
         this.props.users.forEach((val, id)=>{
-            users.push(<Link key={id} to={`/repos/${val.login}`} ><li id={val.login} onClick={this.fetchRepos} key={id}>{val.login}</li></Link>)
+            users.push(<Link key={id} to={`/repos/${val.login}`} ><tr><td width='500' id={val.login} onClick={this.fetchRepos} key={id}>{val.login}</td></tr></Link>)
         })
         disp=(
             <ul>{users}</ul>
@@ -32,11 +31,11 @@ class UserList extends Component {
 
     return (
       <Router>
-        <div className="user_list">
+        <table >
             {disp}
             
-            <Route path={`/repos/:login`} component={() => (<div className='hi'><UserRepo repos={this.props.repos} /></div>)} />
-        </div>
+            <Route path={`/repos/:login`} component={() => (<div ><UserRepo repos={this.props.repos} /></div>)} />
+        </table>
       </Router>
     );
   }

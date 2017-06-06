@@ -14,7 +14,7 @@ class UserRepo extends Component {
       let repo_arr=[]
       if(this.props.repos != null){
           this.props.repos.forEach((val,id)=>{
-            repo_arr.push(<p key={id} >{val.html_url}</p>)
+            repo_arr.push(<div className='large-8 col' key={id} >{val.html_url}</div>)
           })
           disp=<div>{repo_arr}</div>
       }else{
@@ -23,7 +23,7 @@ class UserRepo extends Component {
 
     return (
       
-        <div className="repo_list">
+        <div className="row">
             {disp}
         </div>
      
