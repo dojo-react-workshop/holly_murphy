@@ -22,7 +22,7 @@
 
 function bp(arr){
     //calc sum of entire array
-    let sum=Array.reduce(function(accum, val){
+    let sum1=Array.reduce(function(accum, val){
         return accum + val;
     })
 
