@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title></title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://uitk.learnvest.com/v/1.16.0/css/nm/fonts.css" />
+    <link rel="stylesheet" href="https://uitk.learnvest.com/v/1.16.0/css/nm/icons.css" />
+    <link rel="stylesheet" href="https://uitk.learnvest.com/v/1.16.0/css/nm/main.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/redux/3.0.4/redux.js" />
+</head>
+
+<body>
+    <div class="row">
+        <div class="columns large-6 large-centered medium-6 medium-centered small-6 small-centered">
+            <h2>Counter: <span id="counter"></span></h2>
+            <button id="increment">Increment</button>
+            <button id="decrement">Decrement</button>
+        </div>
+    </div>
+</body>
+<script>
+
+    //reducer
+    counter=(state=0, action)=>{
+        switch(action.type){
+            case 'INCREMENT':
+                return state+1;
+            case 'DECREMENT':
+                return state-1;
+            default:
+                return state
+        }
+    }
+
+    const { createStore } = Redux; 
+    const store=createStore(counter)
+    const render = () => {
+        document.body.innerText = store.getState()
+    }
+
+    store.subscribe((render) => {
+        render()
+    })
+
+    document.addEventListener('click', () => {
+        store.dispatch({ type: 'INCREMENT'})
+    })
+
+
+</script>
+
+</html>

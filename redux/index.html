@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title></title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://uitk.learnvest.com/v/1.16.0/css/nm/fonts.css" />
+    <link rel="stylesheet" href="https://uitk.learnvest.com/v/1.16.0/css/nm/icons.css" />
+    <link rel="stylesheet" href="https://uitk.learnvest.com/v/1.16.0/css/nm/main.css" />
+    <script>
+        function createStore(reducer) {
+            const listeners = [];
+            let state = {};
+            function runCallbacks() {
+                listeners.forEach((cb) => {
+                    cb();
+                });
+            }
+            // store should have the following interface/functionality:
+            return {
+                getState: function (key) {
+                    return state[key];
+                },
+                subscribe: function (callback) {
+                    listeners.push(callback);
+                },
+                dispatch: function (action) {
+                    console.log(
+                        `
+                        DISPATCHING: ${action.type}
+                        PREV_STATE: ${JSON.stringify(state)}
+                    `
+                    );
+                    state = reducer(state, action);
+                    console.log(`NEWSTATE: ${JSON.stringify(state)}`);
+                    runCallbacks();
+                }
+            }
+        }
+    </script>
+</head>
+
+<body>
+    <div class="row">
+        <div class="columns large-6 large-centered medium-6 medium-centered small-6 small-centered">
+            <h2>Counter: <span id="counter"></span></h2>
+            <button id="increment">Increment</button>
+            <button id="decrement">Decrement</button>
+        </div>
+    </div>
+</body>
+<script>
+    // createStore(reducer) => { getState, subscribe, dispatch }
+    function reducer(oldState, action) {
+        const newState = Object.assign({}, oldState);
+        switch (action.type) {
+            case "INC":
+                newState.count = oldState.count + 1;
+                break;
+            case "DEC":
+                newState.count = oldState.count - 1;
+                break;
+            default:
+                newState.count = 0;
+        }
+        return newState
+    }
+    const store = createStore(reducer);
+    store.subscribe(render);
+    store.dispatch({
+        type: 'INIT'
+    });
+    function render() {
+        document.getElementById('counter').innerHTML = store.getState('count');
+    }
+    const incButton = document.getElementById('increment');
+    incButton.onclick = function handleIncrement() {
+        store.dispatch({
+            type: 'INC'
+        });
+    }
+    const decButton = document.getElementById('decrement');
+    decButton.onclick = function handleDecrement() {
+        store.dispatch({
+            type: 'DEC'
+        });
+    }
+</script>
+
+</html>
