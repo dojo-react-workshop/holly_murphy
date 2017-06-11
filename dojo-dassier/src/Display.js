@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import Title from './Title'
 import './App.css'
 import './display.css'
+import { connect } from 'react-redux'
 
 class Display extends Component{
 
@@ -9,29 +10,31 @@ class Display extends Component{
         newItem: ''
     }
 
-    handleClick = (e) => {
-        this.props.handleClick(e)
-    } 
+    // selectIndex = (index) =>{
+    //     this.props.selectIndex(index)
+    // }
 
-    selectIndex = (index) =>{
-        this.props.selectIndex(index)
-    }
-
-    updateNewItem = (e) => {
+    updateNewItem = (e) => {        
         let text = e.target.value
         this.setState((prev) => {
             let newstate = { ...prev }
-            newstate.newItem=text
+             newstate.newItem=text
             return newstate
-        })
+         })
     }
 
     addNewItem = () => {
-        this.props.addNewItem(this.props.state.selectedTab, this.state.newItem)
+        //this.props.addNewItem(this.props.state.selectedTab, this.state.newItem)
+        console.log(`in add-new-item`, this.props)
+        console.log(`new item`, this.state.newItem)
+        console.log(`addNewItem: `, this.props.addNewItem)
+        this.props.addNewItem(this.props.selectedTab,this.state.newItem)
     }
 
     render(){
-    let liDisp=this.props.state.tabs[this.props.state.selectedTab].listOfItems.map((val, ind) => {
+        //console.log(`props.getstate: `, this.props.getState())
+        console.log(`in display; props: `, this.props)
+    let liDisp=this.props.tabs[this.props.selectedTab].listOfItems.map((val, ind) => {
         if(val==='default'){
             return <div key={ind}></div>
         }else{
@@ -42,7 +45,7 @@ class Display extends Component{
     return(
         
         <div>
-            <div className='row'><Title state={this.props.state} handleClick={this.handleClick} selectIndex={this.selectIndex} /></div>
+            <div className='row'><Title /></div>
             <div className='row' id='list_disp'>
                 <div className='medium-28 col'>
                     <ul>
@@ -63,4 +66,23 @@ class Display extends Component{
   }
 }
 
-export default Display
+const mapStateToProps = (state) => {
+    return {
+        tabs: state.tabs,
+        selectedTab: state.selectedTab
+    }
+}
+
+const mapDispatchToProps = (dispatch) => {
+    console.log(`in mapDispatchToProps`, dispatch)
+    return{
+        addNewItem: (index,item) => {
+            dispatch({
+                type:'ADD_ITEM',
+                id: index,
+                item: item
+            })
+        }
+    }
+}
+export default connect(mapStateToProps,mapDispatchToProps)(Display)

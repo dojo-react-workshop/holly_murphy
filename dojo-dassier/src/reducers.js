@@ -3,25 +3,18 @@
       tabs: [
             {
               id: 0,
-              listOfItems: ['candies', 'peanuts', 'cracker jacks'],
-              name: 'Holly'
-            },
-            {
-              id: 1,
-              listOfItems: ['tools', 'dogs', 'baseball'],
-              name: 'Bob'
-            },
-            {
-              id: 2,
-              listOfItems: ['balls', 'food', 'jogging'],
-              name: 'Fern'
+              listOfItems: ['random', 'items', 'in a list'],
+              name: 'Item 1'
             }
           ],
       selectedTab: 0,
-      tabNo: 3
+      tabNo: 1
     }, action)=>{
 
-    
+    console.log(`in reducer`)
+    console.log(`state: `, state)
+    console.log(`action: `, action.type)
+    console.log(`action id: `, action.id)
 
     switch(action.type){
       case 'UPDATE_SELECTED_TAB':

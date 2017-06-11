@@ -1,15 +1,7 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
 import './App.css';
 import Display from './Display'
-import { createStore } from 'redux'
-import { render } from 'react-dom'
-import Redux from 'react-redux'
-import { Provider } from 'react-redux'
-import ReactDOM from 'react-dom'
-import Container from './Container'
-import reducer from './reducers'
-
+import { connect } from 'react-redux'
 
 
 class App extends Component{
@@ -30,16 +22,17 @@ updateTitle = (e) => {
 }
 
 addTab = () =>{
+  console.log(`in-add-Tab: `, this.state.title)
   this.props.addTab(this.state.title)
 }
 
-selectIndex = (index) => {
-  this.props.selectIndex(index)
-}
+// selectIndex = (index) => {
+//   this.props.selectIndex(index)
+// }
 
-addNewItem = (index, item) => {
-  this.props.addNewItem(index, item)
-}
+// addNewItem = (index, item) => {
+//   this.props.addNewItem(index, item)
+// }
 
   render(){
    return(
@@ -49,16 +42,31 @@ addNewItem = (index, item) => {
             <h1>Dojo Dossier</h1>
           </div>
           <div className='medium-10 col'>
-            <input type='text' placeholder='Title' value={this.title} onChange={this.updateTitle} />
+            <input type='text' placeholder='Title' />
             <label className='label small secondary' onClick={this.addTab} >Add New Tab</label>
           </div>
         </div>
         <div className='row'>
-          <div className='medium-28 columns'><Display state={this.props.state} selectIndex={this.selectIndex} addNewItem={this.addNewItem} /></div>
+          <div className='medium-28 columns'><Display /></div>
         </div>
       </div>
     )
   }
 }
 
-export default App;
+const mapDispatchToProps = (dispatch) => {
+
+   console.log(`mapDispatch for App: `,dispatch)
+    return{
+     
+        addTab: (name) => {
+            dispatch({
+              type: 'ADD_TAB',
+              name: name
+            })
+        }
+    }
+}
+
+export default connect(null,mapDispatchToProps)(App)
+
