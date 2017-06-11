@@ -26,7 +26,7 @@
         newState.tabs.push({
                 id: state.tabNo,
                 listOfItems: ['default'],
-                name: action.name.name
+                name: action.name
             })
         newState.tabNo++
        return newState

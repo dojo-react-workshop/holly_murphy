@@ -12,7 +12,7 @@ state={
 
 updateTitle = (e) => {
   let newTitle = e.target.value
-
+  console.log(`update title: `, this.state.title)
   this.setState((prev)=>{
     let newstate = { ...prev }
     newstate.title=newTitle
@@ -42,7 +42,7 @@ addTab = () =>{
             <h1>Dojo Dossier</h1>
           </div>
           <div className='medium-10 col'>
-            <input type='text' placeholder='Title' />
+            <input type='text' placeholder='Title' onChange={this.updateTitle} />
             <label className='label small secondary' onClick={this.addTab} >Add New Tab</label>
           </div>
         </div>
