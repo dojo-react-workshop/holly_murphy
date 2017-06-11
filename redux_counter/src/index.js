@@ -7,30 +7,6 @@ import Redux from 'react-redux'
 import { Provider } from 'react-redux'
 import { createStore, combineReducers } from 'redux'
 
-// const updateCount = (count = 0, action) => {
-//     switch (action.type) {
-//         case 'INCREMENT':
-//             return count + 1;
-//         case 'DECREMENT':
-//             return count - 1;
-//         default:
-//             return count
-//     }
-// }
-
-// const updateCounter = (noOfCounters = 1, action) => {
-//     console.log(`in updateCounter`)
-//     console.log(`action type: `, action.type)
-//     switch (action.type) {
-//         case 'ADD_COUNTER':
-//             return noOfCounters + 1
-//         case 'REMOVE_COUNTER':
-//             return noOfCounters - 1
-//         default:
-//             return noOfCounters
-//     }
-// }
-
 let nextId = 2;
 
 const initialState = {
@@ -38,13 +14,17 @@ const initialState = {
 }
 
 function counterReducer(state = initialState, action) {
-    console.log(action)
     switch (action.type) {
         case 'ADD_COUNTER':
             return {
                 counters: [...state.counters, { id: nextId++, count: 0 }]
             }
         case 'REMOVE_COUNTER':
+            let newstate=state
+            state.counters.pop()
+            let counters=state.counters
+            newstate.counters=counters
+            return newstate
         case 'INCREMENT':
             const oldCounters = state.counters;
             const newCounters = oldCounters.map((counter) => {
@@ -61,6 +41,21 @@ function counterReducer(state = initialState, action) {
             }
 
         case 'DECREMENT':
+            //this is assigning an array of objects to old Count
+            const oldCount = state.counters;
+            //newCount is on the counter object we care about
+            const newCount = oldCount.map((counter)=>{
+                if(counter.id === action.id){
+                    return{
+                        ...counter,
+                        count: counter.count-1
+                    }
+                }
+                return counter
+            })
+            return {
+                counters: newCount
+            }
         default:
             return state;
     }
@@ -72,14 +67,16 @@ const store = createStore(counterReducer);
 
 const render = () => {
     let stateObj = store.getState()
+    console.log(`state: `, stateObj)
     const counters = stateObj.counters.map((counterObj) => {
-        return <Counter key={counterObj.id} count={counterObj.count} onIncrement={() => { store.dispatch({ type: 'INCREMENT', id: counterObj.id }) }} onDecrement={() => { store.dispatch({ type: 'DECREMENT' }) }} />
+        return <Counter key={counterObj.id} count={counterObj.count} onIncrement={() => { store.dispatch({ type: 'INCREMENT', id: counterObj.id }) }} onDecrement={() => { store.dispatch({ type: 'DECREMENT',id: counterObj.id }) }} />
     })
 
     ReactDOM.render(
         <div>
             {counters}
-            <button onClick={() => store.dispatch({ type: 'ADD_COUNTER' })}>Add counter</button>
+            <button onClick={() => store.dispatch({ type: 'ADD_COUNTER' })}>Add counter</button><br />
+            <button onClick={() => store.dispatch({ type: 'REMOVE_COUNTER' })}>Remove counter</button>
         </div>, document.getElementById('root')
     )
 }

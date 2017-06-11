@@ -2,8 +2,6 @@ import React, { Component } from 'react';
 
 const Counter = (props) => {
 
-    console.log(`props in counter`, props.count)
-    console.log(props)
     return (
         <div className="counter">
             <div className='row'>
