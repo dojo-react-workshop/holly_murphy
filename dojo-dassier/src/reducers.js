@@ -23,16 +23,21 @@
         })
       case 'ADD_TAB':
         let newState = Object.assign({},state)
-        newState.tabs.push({
+        let newTabs = newState.tabs.slice()
+        newTabs.push({
                 id: state.tabNo,
                 listOfItems: ['default'],
                 name: action.name
             })
+        newState.tabs=newTabs.slice()
         newState.tabNo++
        return newState
        case 'ADD_ITEM':
          let ns=Object.assign({}, state)
-         ns.tabs[action.id].listOfItems.push(action.item)
+         let newItemsList = ns.tabs[action.id].listOfItems.slice()
+         newItemsList.push(action.item)
+         ns.tabs[action.id].listOfItems = newItemsList.slice()
+         console.log(`updateitem: `, ns.tabs[action.id].listOfItems)
          return ns
       default:
         return state
