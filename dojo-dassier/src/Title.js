@@ -9,8 +9,6 @@ class Title extends Component{
 
     render(){
         let disp=this.props.tabs.map((val, ind, arr)=>{
-            console.log(`selected tab: `, this.props.selectedTab)
-            console.log(`index: `, ind)
        if(this.props.selectedTab === ind){
             return <li key={val.id} className='filter-nav-entry active'><button id={val.id}>{val.name}</button></li>
        }else{

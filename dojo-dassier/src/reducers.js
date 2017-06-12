@@ -30,7 +30,9 @@
        return newState
        case 'ADD_ITEM':
          let ns=Object.assign({}, state)
+         ns.tabs = [ ...state.tabs ]
          let newItemsList = ns.tabs[action.id].listOfItems.slice()
+        // let newItemsList = ns.tabs[action.id].listOfItems.push
          newItemsList.push(action.item)
          ns.tabs[action.id].listOfItems = newItemsList.slice()
          return ns
