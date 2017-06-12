@@ -11,10 +11,6 @@
       tabNo: 1
     }, action)=>{
 
-    console.log(`in reducer`)
-    console.log(`state: `, state)
-    console.log(`action: `, action.type)
-    console.log(`action id: `, action.id)
 
     switch(action.type){
       case 'UPDATE_SELECTED_TAB':
@@ -37,7 +33,6 @@
          let newItemsList = ns.tabs[action.id].listOfItems.slice()
          newItemsList.push(action.item)
          ns.tabs[action.id].listOfItems = newItemsList.slice()
-         console.log(`updateitem: `, ns.tabs[action.id].listOfItems)
          return ns
       default:
         return state

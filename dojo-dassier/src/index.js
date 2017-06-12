@@ -31,7 +31,6 @@ import reducer from './reducers'
 // }
 
 let store = createStore(reducer)
-console.log(`state: `, store.getState())
 const render = () => ReactDOM.render(<Provider store={store}><App /></Provider>, document.getElementById('root'));
 
 render()

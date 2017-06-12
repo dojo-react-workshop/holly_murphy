@@ -25,15 +25,16 @@ class Display extends Component{
 
     addNewItem = () => {
         //this.props.addNewItem(this.props.state.selectedTab, this.state.newItem)
-        console.log(`in add-new-item`, this.props)
-        console.log(`new item`, this.state.newItem)
-        console.log(`addNewItem: `, this.props.addNewItem)
         this.props.addNewItem(this.props.selectedTab,this.state.newItem)
+        this.setState((prev) => {
+            let newstate = { ...prev }
+            newstate.newItem=''
+            return newstate
+        })
+        
     }
 
     render(){
-        //console.log(`props.getstate: `, this.props.getState())
-        console.log(`in display; props: `, this.props)
     let liDisp=this.props.tabs[this.props.selectedTab].listOfItems.map((val, ind) => {
         if(val==='default'){
             return <div key={ind}></div>
@@ -74,7 +75,6 @@ const mapStateToProps = (state) => {
 }
 
 const mapDispatchToProps = (dispatch) => {
-    console.log(`in mapDispatchToProps`, dispatch)
     return{
         addNewItem: (index,item) => {
             dispatch({

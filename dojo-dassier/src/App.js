@@ -12,7 +12,7 @@ state={
 
 updateTitle = (e) => {
   let newTitle = e.target.value
-  console.log(`update title: `, this.state.title)
+
   this.setState((prev)=>{
     let newstate = { ...prev }
     newstate.title=newTitle
@@ -22,8 +22,19 @@ updateTitle = (e) => {
 }
 
 addTab = () =>{
-  console.log(`in-add-Tab: `, this.state.title)
-  this.props.addTab(this.state.title)
+  let tabPromise = new Promise((resolve, reject) => {
+    this.props.addTab(this.state.title)
+    resolve()
+  })
+  tabPromise.then((success) => {
+
+  this.setState((prev) =>{
+    let newstate={ ...prev }
+    newstate.title=''
+    return newstate
+  })
+  })//then
+  
 }
 
 // selectIndex = (index) => {
@@ -42,7 +53,7 @@ addTab = () =>{
             <h1>Dojo Dossier</h1>
           </div>
           <div className='medium-10 col'>
-            <input type='text' placeholder='Title' onChange={this.updateTitle} />
+            <input type='text' placeholder='Title' value={this.state.title} onChange={this.updateTitle} />
             <label className='label small secondary' onClick={this.addTab} >Add New Tab</label>
           </div>
         </div>
@@ -55,8 +66,6 @@ addTab = () =>{
 }
 
 const mapDispatchToProps = (dispatch) => {
-
-   console.log(`mapDispatch for App: `,dispatch)
     return{
      
         addTab: (name) => {
