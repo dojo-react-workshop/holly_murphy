@@ -15,10 +15,10 @@
     var prizes = ['A Unicorn!', 'A Hug!', 'Fresh Laundry!'];
     for (var btnNum = 0; btnNum < prizes.length; btnNum++) {
         // for each of our buttons, when the user clicks it...
-        document.getElementById('btn-' + btnNum).onclick = function() {
+        document.getElementById('btn-' + btnNum).onclick = function(e) {
             console.log('btn-'+btnNum)
             // tell her what she's won!
-            alert(prizes[btnNum]);
+            alert(prizes[e.target.id[e.target.id.length-1]]);
         };
     }
 </script>
